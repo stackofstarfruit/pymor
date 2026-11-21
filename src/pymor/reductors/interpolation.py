@@ -121,8 +121,8 @@ class GenericBHIReductor(BasicObject):
         assert projection in ('orth', 'biorth')
 
         # rescale tangential directions (to avoid overflow or underflow)
-        b = b / np.linalg.norm(b, axis=0) if b.shape[1] > 1 else np.ones((r, 1))
-        c = c / np.linalg.norm(c, axis=0) if c.shape[1] > 1 else np.ones((r, 1))
+        b = b / np.linalg.norm(b, axis=1, keepdims=True) if b.shape[1] > 1 else np.ones((r, 1))
+        c = c / np.linalg.norm(c, axis=1, keepdims=True) if c.shape[1] > 1 else np.ones((r, 1))
         b = self.fom.D.source.from_numpy(b.T)
         c = self.fom.D.range.from_numpy(c.T)
 
